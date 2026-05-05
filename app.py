@@ -2,46 +2,74 @@ import streamlit as st
 import pickle
 import numpy as np
 
-# Load model
+# ------------------ PAGE CONFIG ------------------
+st.set_page_config(page_title="Personality App", layout="centered")
+
+# ------------------ CUSTOM STYLE ------------------
+st.markdown("""
+    <style>
+    body {
+        background-color: white;
+    }
+    .stApp {
+        background-color: white;
+    }
+    h1 {
+        color: #4CAF50;
+        text-align: center;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# ------------------ LOAD MODEL ------------------
 model = pickle.load(open("model.pkl", "rb"))
 
-# Title
+# ------------------ HEADER ------------------
 st.title("🧠 Personality Prediction App")
-st.markdown("### Predict whether a person is Introvert or Extrovert")
+st.markdown("### Find out if you're an Introvert or Extrovert")
 
-# Sidebar
-st.sidebar.title("About")
-st.sidebar.info("This app predicts personality using Machine Learning (Logistic Regression).")
+st.markdown("---")
 
-st.write("Fill the details below:")
+# ------------------ INPUT SECTION ------------------
+st.subheader("📋 Enter Your Details")
 
-# Inputs
-time_alone = st.number_input("Time spent alone", min_value=0, value=2)
+col1, col2 = st.columns(2)
 
-stage_fear = st.selectbox("Stage Fear", ["Yes", "No"])
+with col1:
+    time_alone = st.slider("Time spent alone (hrs)", 0, 24, 2)
+    social_events = st.slider("Social event attendance", 0, 10, 1)
+    friends = st.slider("Friends circle size", 0, 50, 5)
 
-social_events = st.number_input("Social event attendance", min_value=0, value=1)
+with col2:
+    going_out = st.slider("Outdoor activity frequency", 0, 10, 1)
+    posts = st.slider("Social media post frequency", 0, 10, 1)
 
-going_out = st.number_input("Outdoor activity frequency", min_value=0, value=1)
+stage_fear = st.radio("Do you have stage fear?", ["Yes", "No"])
+drained = st.radio("Do you feel drained after socializing?", ["Yes", "No"])
 
-drained = st.selectbox("Drained after socializing", ["Yes", "No"])
+st.markdown("---")
 
-friends = st.number_input("Friends circle size", min_value=0, value=5)
+# ------------------ PREDICTION ------------------
+if st.button("🔍 Predict Personality"):
 
-posts = st.number_input("Post frequency", min_value=0, value=1)
+    stage_fear_val = 1 if stage_fear == "Yes" else 0
+    drained_val = 1 if drained == "Yes" else 0
 
-# Convert categorical
-stage_fear = 1 if stage_fear == "Yes" else 0
-drained = 1 if drained == "Yes" else 0
+    input_data = np.array([[time_alone, stage_fear_val, social_events,
+                            going_out, drained_val, friends, posts]])
 
-# Predict
-if st.button("Predict"):
-    input_data = np.array([[time_alone, stage_fear, social_events, going_out, drained, friends, posts]])
     prediction = model.predict(input_data)
 
-    if prediction[0] == 1:
-        st.success("🟢 Extrovert")
-    else:
-        st.error("🔵 Introvert")
+    st.markdown("## 🎯 Result")
 
-    st.info("This prediction is based on a Logistic Regression model trained on social behavior data.")
+    if prediction[0] == 1:
+        st.success("🟢 You are an **Extrovert**")
+    else:
+        st.error("🔵 You are an **Introvert**")
+
+    st.info("This prediction is based on Logistic Regression trained on behavioral data.")
+
+st.markdown("---")
+
+# ------------------ FOOTER ------------------
+st.markdown("💡 Built with Streamlit | Machine Learning Project")
