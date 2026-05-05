@@ -34,4 +34,4 @@ streamlit run app.py
 
 ## 🌐 Live Demo
 
-https://personality-app-mmv2hc9wbrymyqgu7pbjga.streamlit.app/
+[🚀 Click here to use the app](https://personality-app-mmv2hc9wbrymyqgu7pbjga.streamlit.app/)
