@@ -5,18 +5,30 @@ import numpy as np
 # Load model
 model = pickle.load(open("model.pkl", "rb"))
 
+# Title
 st.title("🧠 Personality Prediction App")
+st.markdown("### Predict whether a person is Introvert or Extrovert")
 
-st.write("Enter details to predict personality")
+# Sidebar
+st.sidebar.title("About")
+st.sidebar.info("This app predicts personality using Machine Learning (Logistic Regression).")
+
+st.write("Fill the details below:")
 
 # Inputs
-time_alone = st.number_input("Time spent alone")
+time_alone = st.number_input("Time spent alone", min_value=0, value=2)
+
 stage_fear = st.selectbox("Stage Fear", ["Yes", "No"])
-social_events = st.number_input("Social event attendance")
-going_out = st.number_input("Going outside")
+
+social_events = st.number_input("Social event attendance", min_value=0, value=1)
+
+going_out = st.number_input("Outdoor activity frequency", min_value=0, value=1)
+
 drained = st.selectbox("Drained after socializing", ["Yes", "No"])
-friends = st.number_input("Friends circle size")
-posts = st.number_input("Post frequency")
+
+friends = st.number_input("Friends circle size", min_value=0, value=5)
+
+posts = st.number_input("Post frequency", min_value=0, value=1)
 
 # Convert categorical
 stage_fear = 1 if stage_fear == "Yes" else 0
@@ -28,6 +40,8 @@ if st.button("Predict"):
     prediction = model.predict(input_data)
 
     if prediction[0] == 1:
-        st.success("Extrovert")
+        st.success("🟢 Extrovert")
     else:
-        st.success("Introvert")
+        st.error("🔵 Introvert")
+
+    st.info("This prediction is based on a Logistic Regression model trained on social behavior data.")
