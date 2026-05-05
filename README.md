@@ -31,3 +31,7 @@ This project is a Machine Learning web application that predicts whether a perso
 ```bash
 pip install -r requirements.txt
 streamlit run app.py
+
+## 🌐 Live Demo
+
+https://personality-app-mmv2hc9wbrymyqgu7pbjga.streamlit.app/
