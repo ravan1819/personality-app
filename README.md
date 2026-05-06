@@ -2,6 +2,9 @@
 
 This project is a Machine Learning web application that predicts whether a person is an **Introvert** or **Extrovert** based on their social behavior.
 
+## 🌐 Live Demo
+
+[🚀 Open Live App](https://personality-app-mmv2hc9wbrymyqgu7pbjga.streamlit.app/)
 
 📁 Project Structure
 
@@ -32,10 +35,14 @@ Personality	Target variable (Introvert = 0, Extrovert = 1)
 - Post frequency
 
 ## 🛠️ Technologies Used
+
 - Python
-- Pandas, NumPy
+- Pandas
+- NumPy
 - Scikit-learn
 - Streamlit
+- Matplotlib
+- Seaborn
 
 Steps Performed
 ✅ Handled missing values and duplicates
@@ -48,12 +55,3 @@ Steps Performed
 
 - Logistic Regression
 - Data preprocessing (handling missing values & encoding)
-
-## ▶️ How to Run Locally
-```bash
-pip install -r requirements.txt
-streamlit run app.py
-
-## 🌐 Live Demo
-
-[🚀 Click here to use the app](https://personality-app-mmv2hc9wbrymyqgu7pbjga.streamlit.app/)
