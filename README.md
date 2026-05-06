@@ -44,6 +44,8 @@ Steps Performed
 
 
 ## ⚙️ Model
+<img width="962" height="814" alt="image" src="https://github.com/user-attachments/assets/bbbefe82-69bd-49a9-8b32-662e0b1e3c23" />
+
 - Logistic Regression
 - Data preprocessing (handling missing values & encoding)
 
