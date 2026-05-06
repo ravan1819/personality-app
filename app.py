@@ -66,8 +66,8 @@ if st.button("🔍 Predict Personality"):
     # ---------------- ACCURACY ----------------
     st.subheader("📊 Model Accuracy")
 
-    st.write(f"Accuracy: {accuracy:.2f}")
-
+    st.success(f"Model Accuracy: {accuracy*100:.2f}%")
+    
     # ---------------- INPUT GRAPH ----------------
     st.subheader("📈 Your Input Overview")
 
